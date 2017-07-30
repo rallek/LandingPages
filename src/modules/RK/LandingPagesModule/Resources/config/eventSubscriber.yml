@@ -1,0 +1,78 @@
+services:
+    # Event subscribers and listeners
+    rk_landingpages_module.entity_lifecycle_listener:
+        class: RK\LandingPagesModule\Listener\EntityLifecycleListener
+        arguments:
+            - "@service_container"
+            - "@event_dispatcher"
+            - "@logger"
+        tags:
+            - { name: doctrine.event_subscriber }
+    
+    rk_landingpages_module.kernel_listener:
+        class: RK\LandingPagesModule\Listener\KernelListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    rk_landingpages_module.installer_listener:
+        class: RK\LandingPagesModule\Listener\InstallerListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    rk_landingpages_module.moduledispatch_listener:
+        class: RK\LandingPagesModule\Listener\ModuleDispatchListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    rk_landingpages_module.mailer_listener:
+        class: RK\LandingPagesModule\Listener\MailerListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    rk_landingpages_module.theme_listener:
+        class: RK\LandingPagesModule\Listener\ThemeListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    rk_landingpages_module.userlogin_listener:
+        class: RK\LandingPagesModule\Listener\UserLoginListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    rk_landingpages_module.userlogout_listener:
+        class: RK\LandingPagesModule\Listener\UserLogoutListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    rk_landingpages_module.user_listener:
+        class: RK\LandingPagesModule\Listener\UserListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    rk_landingpages_module.userregistration_listener:
+        class: RK\LandingPagesModule\Listener\UserRegistrationListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    rk_landingpages_module.users_listener:
+        class: RK\LandingPagesModule\Listener\UsersListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    rk_landingpages_module.group_listener:
+        class: RK\LandingPagesModule\Listener\GroupListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    rk_landingpages_module.thirdparty_listener:
+        class: RK\LandingPagesModule\Listener\ThirdPartyListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    rk_landingpages_module.workflow_events_listener:
+        class: RK\LandingPagesModule\Listener\WorkflowEventsListener
+        arguments:
+            - "@zikula_permissions_module.api.permission"
+        tags:
+            - { name: kernel.event_subscriber }
+    

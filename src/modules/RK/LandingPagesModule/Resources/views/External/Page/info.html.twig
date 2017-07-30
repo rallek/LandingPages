@@ -1,0 +1,5 @@
+{# Purpose of this template: Display item information for previewing from other modules #}
+<dl id="page{{ page.getKey() }}">
+<dt>{{ page|rklandingpagesmodule_formattedTitle|notifyFilters('landingpages.filter_hooks.pages.filter')|safeHtml }}</dt>
+{% if page.pageContent is not empty %}<dd>{{ page.pageContent }}</dd>{% endif %}
+</dl>

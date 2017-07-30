@@ -1,0 +1,48 @@
+application "LandingPages" {
+    vendor "RK"
+    author "Ralf Koester"
+    email "ralf@familie-koester.de"
+    url "http://k62.de"
+    version "0.1.0"
+    prefix "landpa"
+    generatorSettings {
+        settingsContainer "Settings"
+        markFiles "Resources/public/css/style.css"
+    }
+    entities {
+        entity "page" leading {
+            nameMultiple "pages"
+            displayPattern "#title#"
+            standardFields false
+            fields {
+                string "title" unique,
+                text "pageContent" {
+                    length 20000
+                }
+            }
+            actions {
+                mainAction "Index",
+                viewAction "View",
+                displayAction "Display",
+                editAction "Edit"
+            ,
+                deleteAction "Delete"
+            }
+        },
+        entity "image" {
+            nameMultiple "images"
+            displayPattern "#picture#"
+            standardFields false
+            fields {
+                upload "picture"
+            }
+            actions {
+                mainAction "Index",
+                viewAction "View",
+                displayAction "Display",
+                editAction "Edit",
+                deleteAction "Delete"
+            }
+        }
+    }
+    }

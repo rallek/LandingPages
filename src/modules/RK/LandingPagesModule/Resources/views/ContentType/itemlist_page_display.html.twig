@@ -1,0 +1,6 @@
+{# Purpose of this template: Display pages within an external context #}
+{% for page in items %}
+    <h3>{{ page|rklandingpagesmodule_formattedTitle }}</h3>
+    <p><a href="{{ path('rklandingpagesmodule_page_display', {'id': page.getId()}) }}">{{ __('Read more') }}</a>
+    </p>
+{% endfor %}

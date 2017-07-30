@@ -1,0 +1,8 @@
+{# purpose of this template: pages view csv view #}
+{% spaceless %}"{{ __('Title') }}";"{{ __('Page content') }}";"{{ __('Workflow state') }}"
+{% endspaceless %}
+{% for page in items %}
+{% spaceless %}
+    "{{ page.title }}";"{{ page.pageContent|safeHtml }}";"{{ page.workflowState|rklandingpagesmodule_objectState(false)|lower }}"
+{% endspaceless %}
+{% endfor %}

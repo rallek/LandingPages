@@ -1,0 +1,8 @@
+{# purpose of this template: images view csv view #}
+{% spaceless %}"{{ __('Picture') }}";"{{ __('Workflow state') }}"
+{% endspaceless %}
+{% for image in items %}
+{% spaceless %}
+    "{{ image.picture }}";"{{ image.workflowState|rklandingpagesmodule_objectState(false)|lower }}"
+{% endspaceless %}
+{% endfor %}

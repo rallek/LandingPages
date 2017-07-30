@@ -1,0 +1,51 @@
+body {
+    background-color: #ddd;
+    margin: 10px;
+    text-align: left;
+}
+
+#rklandingpagesmoduleItemContainer {
+    background-color: #eee;
+    height: 300px;
+    overflow: auto;
+    padding: 5px;
+}
+
+#rklandingpagesmoduleItemContainer ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#rklandingpagesmoduleItemContainer a {
+    color: #000;
+    margin: 0.1em 0.2em;
+    text-decoration: underline;
+}
+#rklandingpagesmoduleItemContainer a:hover,
+#rklandingpagesmoduleItemContainer a:focus,
+#rklandingpagesmoduleItemContainer a:active {
+    color: #900;
+    text-decoration: none;
+}
+
+#rklandingpagesmoduleItemContainer a img {
+    border: none;
+}
+
+#rklandingpagesmoduleItemContainer a img {
+    border: 1px solid #ccc;
+    background-color: #f5f5f5;
+    padding: 0.5em;
+}
+#rklandingpagesmoduleItemContainer a:hover img,
+#rklandingpagesmoduleItemContainer a:focus img,
+#rklandingpagesmoduleItemContainer a:active img {
+    background-color: #fff;
+}
+
+.rklandingpagesmodule-finderform fieldset,
+.rklandingpagesmodule-finderform fieldset legend {
+    background-color: #fff;
+    border: none;
+}

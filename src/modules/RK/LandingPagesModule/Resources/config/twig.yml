@@ -1,0 +1,13 @@
+services:
+    # Twig extension
+    rk_landingpages_module.twig_extension:
+        class: RK\LandingPagesModule\Twig\TwigExtension
+        arguments:
+            - "@translator.default"
+            - "@zikula_extensions_module.api.variable"
+            - "@rk_landingpages_module.entity_display_helper"
+            - "@rk_landingpages_module.workflow_helper"
+            - "@rk_landingpages_module.listentries_helper"
+        public: false
+        tags:
+            - { name: twig.extension }

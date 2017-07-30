@@ -1,0 +1,7 @@
+{# purpose of this template: pages xml inclusion template #}
+<page id="{{ page.getId() }}">
+    <id>{{ page.id }}</id>
+    <title><![CDATA[{{ page.title }}]]></title>
+    <pageContent><![CDATA[{{ page.pageContent|safeHtml }}]]></pageContent>
+    <workflowState>{{ page.workflowState|rklandingpagesmodule_objectState(false)|lower }}</workflowState>
+</page>

@@ -1,0 +1,12 @@
+services:
+    # Entity factory
+    rk_landingpages_module.entity_factory:
+        class: RK\LandingPagesModule\Entity\Factory\EntityFactory
+        arguments:
+            - "@doctrine.orm.default_entity_manager"
+            - "@rk_landingpages_module.entity_initialiser"
+            - "@rk_landingpages_module.collection_filter_helper"
+    
+    # Entity initialiser
+    rk_landingpages_module.entity_initialiser:
+        class: RK\LandingPagesModule\Entity\Factory\EntityInitialiser

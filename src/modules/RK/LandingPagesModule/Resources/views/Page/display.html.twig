@@ -1,0 +1,41 @@
+{# purpose of this template: pages display view #}
+{% set baseTemplate = app.request.query.getBoolean('raw', false) ? 'raw' : (routeArea == 'admin' ? 'adminBase' : 'base') %}
+{% extends 'RKLandingPagesModule::' ~ baseTemplate ~ '.html.twig' %}
+{% block pageTitle %}{{ page|rklandingpagesmodule_formattedTitle|default(__('Page')) }}{% endblock %}
+{% block title %}
+    {% set templateTitle = page|rklandingpagesmodule_formattedTitle|default(__('Page')) %}
+    {{ templateTitle|notifyFilters('rklandingpagesmodule.filter_hooks.pages.filter')|safeHtml }}
+    {% set itemActions = knp_menu_get('RKLandingPagesModule:ItemActionsMenu:menu', [], {entity: page, area: routeArea, context: 'display'}) %}
+    <div class="dropdown">
+        <a id="itemActions{{ page.getKey() }}DropDownToggle" role="button" data-toggle="dropdown" data-target="#" href="javascript:void(0);" class="hidden dropdown-toggle"><i class="fa fa-tasks"></i> {{ __('Actions') }} <span class="caret"></span></a>
+        {{ knp_menu_render(itemActions, {template: 'ZikulaMenuModule:Override:actions.html.twig'}) }}
+    </div>
+{% endblock %}
+{% block admin_page_icon 'eye' %}
+{% block content %}
+    {% set isQuickView = app.request.query.getBoolean('raw', false) %}
+    <div class="rklandingpagesmodule-page rklandingpagesmodule-display">
+
+    <dl>
+        {% if page.title is not empty %}
+            <dt>{{ __('Title') }}</dt>
+            <dd>{{ page.title }}</dd>
+        {% endif %}
+        {% if page.pageContent is not empty %}
+            <dt>{{ __('Page content') }}</dt>
+            <dd>{{ page.pageContent|safeHtml }}</dd>
+        {% endif %}
+        
+    </dl>
+
+
+    {{ block('display_hooks') }}
+</div>
+{% endblock %}
+{% block display_hooks %}
+    {% set hooks = notifyDisplayHooks(eventName='rklandingpagesmodule.ui_hooks.pages.display_view', id=page.getKey(), urlObject=currentUrlObject) %}
+    {% for providerArea, hook in hooks if providerArea != 'provider.scribite.ui_hooks.editor' %}
+        <h4>{{ providerArea }}</h4>
+        {{ hook }}
+    {% endfor %}
+{% endblock %}

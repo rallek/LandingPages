@@ -1,0 +1,43 @@
+services:
+    rk_landingpages_module.hook_subscriber.filter_hooks.pages:
+        class: RK\LandingPagesModule\HookSubscriber\PageFilterHooksSubscriber
+        arguments:
+            - "@translator.default"
+        tags:
+            - { name: zikula.hook_subscriber, areaName: 'subscriber.rklandingpagesmodule.filter_hooks.pages' }
+
+    rk_landingpages_module.hook_subscriber.form_aware_hook.pages:
+        class: RK\LandingPagesModule\HookSubscriber\PageFormAwareHookSubscriber
+        arguments:
+            - "@translator.default"
+        tags:
+            - { name: zikula.hook_subscriber, areaName: 'subscriber.rklandingpagesmodule.form_aware_hook.pages' }
+
+    rk_landingpages_module.hook_subscriber.ui_hooks.pages:
+        class: RK\LandingPagesModule\HookSubscriber\PageUiHooksSubscriber
+        arguments:
+            - "@translator.default"
+        tags:
+            - { name: zikula.hook_subscriber, areaName: 'subscriber.rklandingpagesmodule.ui_hooks.pages' }
+
+    rk_landingpages_module.hook_subscriber.filter_hooks.images:
+        class: RK\LandingPagesModule\HookSubscriber\ImageFilterHooksSubscriber
+        arguments:
+            - "@translator.default"
+        tags:
+            - { name: zikula.hook_subscriber, areaName: 'subscriber.rklandingpagesmodule.filter_hooks.images' }
+
+    rk_landingpages_module.hook_subscriber.form_aware_hook.images:
+        class: RK\LandingPagesModule\HookSubscriber\ImageFormAwareHookSubscriber
+        arguments:
+            - "@translator.default"
+        tags:
+            - { name: zikula.hook_subscriber, areaName: 'subscriber.rklandingpagesmodule.form_aware_hook.images' }
+
+    rk_landingpages_module.hook_subscriber.ui_hooks.images:
+        class: RK\LandingPagesModule\HookSubscriber\ImageUiHooksSubscriber
+        arguments:
+            - "@translator.default"
+        tags:
+            - { name: zikula.hook_subscriber, areaName: 'subscriber.rklandingpagesmodule.ui_hooks.images' }
+

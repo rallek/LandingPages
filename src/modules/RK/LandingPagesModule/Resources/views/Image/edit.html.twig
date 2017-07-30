@@ -1,0 +1,81 @@
+{# purpose of this template: build the form to edit an instance of image #}
+{% set baseTemplate = app.request.query.getBoolean('raw', false) ? 'raw' : (routeArea == 'admin' ? 'adminBase' : 'base') %}
+{% extends 'RKLandingPagesModule::' ~ baseTemplate ~ '.html.twig' %}
+
+{% block header %}
+    {{ parent() }}
+    {{ pageAddAsset('javascript', zasset('@RKLandingPagesModule:js/RKLandingPagesModule.Validation.js'), 98) }}
+    {{ pageAddAsset('javascript', zasset('@RKLandingPagesModule:js/RKLandingPagesModule.EditFunctions.js'), 99) }}
+{% endblock %}
+{% block title mode == 'create' ? __('Create image') : __('Edit image') %}
+{% block admin_page_icon mode == 'create' ? 'plus' : 'pencil-square-o' %}
+{% block content %}
+    <div class="rklandingpagesmodule-image rklandingpagesmodule-edit">
+        {% form_theme form with [
+            '@RKLandingPagesModule/Form/bootstrap_3.html.twig',
+            'ZikulaFormExtensionBundle:Form:form_div_layout.html.twig'
+        ] %}
+        {{ form_start(form, {attr: {id: 'imageEditForm', class: 'rklandingpages-edit-form'}}) }}
+        {{ form_errors(form) }}
+        <fieldset>
+            <legend>{{ __('Content') }}</legend>
+            {{ form_row(form.picture) }}
+        </fieldset>
+        
+        
+        {% if formHookTemplates|length > 0 %}
+            <fieldset>
+                {% for hookTemplate in formHookTemplates %}
+                    {{ include(hookTemplate.0, hookTemplate.1, ignore_missing = true) }}
+                {% endfor %}
+            </fieldset>
+        {% endif %}
+        
+        {# include return control #}
+        {% if mode == 'create' %}
+            <fieldset>
+                <legend>{{ __('Return control') }}</legend>
+                {{ form_row(form.repeatCreation) }}
+            </fieldset>
+        {% endif %}
+        
+        {# include possible submit actions #}
+        <div class="form-group form-buttons">
+            <div class="col-sm-offset-3 col-sm-9">
+                {% for action in actions %}
+                    {{ form_widget(attribute(form, action.id)) }}
+                {% endfor %}
+                {{ form_widget(form.reset) }}
+                {{ form_widget(form.cancel) }}
+            </div>
+        </div>
+        {{ form_end(form) }}
+        {% set hookId = mode != 'create' ? image.id : null %}
+        {% set hooks = notifyDisplayHooks(eventName='rklandingpagesmodule.ui_hooks.images.form_edit', id=hookId) %}
+        {% if hooks is iterable and hooks|length > 0 %}
+            <h3>{{ __('Hooks') }}</h3>
+            {% for providerArea, hook in hooks if providerArea != 'provider.scribite.ui_hooks.editor' %}
+                <h4>{{ providerArea }}</h4>
+                {{ hook }}
+            {% endfor %}
+        {% endif %}
+        
+    </div>
+{% endblock %}
+{% block footer %}
+    {{ parent() }}
+    {% set formInitScript %}
+        <script type="text/javascript">
+        /* <![CDATA[ */
+            
+            ( function($) {
+                $(document).ready(function() {
+                    rKLandingPagesInitEditForm('{{ mode }}', '{% if mode != 'create' %}{{ image.id }}{% endif %}');
+                    rKLandingPagesInitUploadField('rklandingpagesmodule_image_picture_picture');
+                });
+            })(jQuery);
+        /* ]]> */
+        </script>
+    {% endset %}
+    {{ pageAddAsset('footer', formInitScript) }}
+{% endblock %}

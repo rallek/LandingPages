@@ -1,0 +1,6 @@
+{# purpose of this template: images xml inclusion template #}
+<image id="{{ image.getId() }}">
+    <id>{{ image.id }}</id>
+    <picture{% if image.picture is not empty and image.pictureMeta|default %} extension="{{ image.pictureMeta.extension }}" size="{{ image.pictureMeta.size }}" isImage="{% if image.pictureMeta.isImage %}true{% else %}false{% endif %}"{% if image.pictureMeta.isImage %} width="{{ image.pictureMeta.width }}" height="{{ image.pictureMeta.height }}" format="{{ image.pictureMeta.format }}"{% endif %}{% endif %}>{{ image.picture }}</picture>
+    <workflowState>{{ image.workflowState|rklandingpagesmodule_objectState(false)|lower }}</workflowState>
+</image>

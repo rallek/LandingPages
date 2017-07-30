@@ -1,0 +1,12 @@
+services:
+    # Form field types
+    
+    rk_landingpages_module.form.type.field.upload:
+        class: RK\LandingPagesModule\Form\Type\Field\UploadType
+        arguments:
+            - "@translator.default"
+            - "@request_stack"
+            - "@rk_landingpages_module.image_helper"
+            - "@rk_landingpages_module.upload_helper"
+        tags:
+            - { name: form.type }

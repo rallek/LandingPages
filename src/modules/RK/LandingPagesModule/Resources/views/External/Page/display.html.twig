@@ -1,0 +1,39 @@
+{# Purpose of this template: Display one certain page within an external context #}
+<div id="page{{ page.getKey() }}" class="rklandingpagesmodule-external-page">
+{% if displayMode == 'link' %}
+    <p class="rklandingpagesmodule-external-link">
+    <a href="{{ path('rklandingpagesmodule_page_display', {'id': page.getId()}) }}" title="{{ page|rklandingpagesmodule_formattedTitle|e('html_attr') }}">
+    {{ page|rklandingpagesmodule_formattedTitle|notifyFilters('landingpages.filter_hooks.pages.filter')|safeHtml }}
+    </a>
+    </p>
+{% endif %}
+{% if hasPermission('RKLandingPagesModule::', '::', 'ACCESS_EDIT') %}
+    {# for normal users without edit permission show only the actual file per default #}
+    {% if displayMode == 'embed' %}
+        <p class="rklandingpagesmodule-external-title">
+            <strong>{{ page|rklandingpagesmodule_formattedTitle|notifyFilters('landingpages.filter_hooks.pages.filter')|safeHtml }}</strong>
+        </p>
+    {% endif %}
+{% endif %}
+
+{% if displayMode == 'link' %}
+{% elseif displayMode == 'embed' %}
+    <div class="rklandingpagesmodule-external-snippet">
+        &nbsp;
+    </div>
+
+    {# you can distinguish the context like this: #}
+    {# % if source == 'contentType' %}
+        ...
+    {% elseif source == 'scribite' %}
+        ...
+    {% endif % #}
+
+    {# you can enable more details about the item: #}
+    {#
+        <p class="rklandingpagesmodule-external-description">
+            {% if page.pageContent is not empty %}{{ page.pageContent }}<br />{% endif %}
+        </p>
+    #}
+{% endif %}
+</div>

@@ -1,0 +1,15 @@
+{# Purpose of this template: Display item information for previewing from other modules #}
+<dl id="image{{ image.getKey() }}">
+<dt>{{ image|rklandingpagesmodule_formattedTitle|notifyFilters('landingpages.filter_hooks.images.filter')|safeHtml }}</dt>
+<dd>{% if image.pictureMeta|default %}
+<a href="{{ image.pictureUrl }}" title="{{ image|rklandingpagesmodule_formattedTitle|e('html_attr') }}"{% if image.pictureMeta.isImage %} class="image-link"{% endif %}>
+{% if image.pictureMeta.isImage %}
+    {% set thumbOptions = attribute(thumbRuntimeOptions, 'imagePicture') %}
+    <img src="{{ image.picture.getPathname()|imagine_filter('zkroot', thumbOptions) }}" alt="{{ image|rklandingpagesmodule_formattedTitle|e('html_attr') }}" width="{{ thumbOptions.thumbnail.size[0] }}" height="{{ thumbOptions.thumbnail.size[1] }}" class="img-thumbnail" />
+{% else %}
+    {{ __('Download') }} ({{ image.pictureMeta.size|rklandingpagesmodule_fileSize(image.picture.getPathname(), false, false) }})
+{% endif %}
+</a>
+{% endif %}
+</dd>
+</dl>
