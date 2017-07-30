@@ -63,27 +63,31 @@ var lastPageTitle = '';
 /**
  * Performs a duplicate check for unique fields
  */
-function rKLandingPagesUniqueCheck(ucOt, val, elem, ucEx)
+function rKLandingPagesUniqueCheck(elem, excludeId)
 {
-    var result, params;
+    var objectType, fieldName, fieldValue, result, params;
 
-    if (elem.val() == window['last' + rKLandingPagesCapitaliseFirstLetter(ucOt) + rKLandingPagesCapitaliseFirstLetter(elem.attr('id')) ]) {
+    objectType = elem.attr('id').split('_')[1];
+    fieldName = elem.attr('id').split('_')[2];
+    fieldValue = elem.val();
+    if (fieldValue == window['last' + rKLandingPagesCapitaliseFirstLetter(objectType) + rKLandingPagesCapitaliseFirstLetter(fieldName) ]) {
         return true;
     }
 
-    window['last' + rKLandingPagesCapitaliseFirstLetter(ucOt) + rKLandingPagesCapitaliseFirstLetter(elem.attr('id')) ] = elem.val();
+    window['last' + rKLandingPagesCapitaliseFirstLetter(objectType) + rKLandingPagesCapitaliseFirstLetter(fieldName) ] = fieldValue;
 
     result = true;
     params = {
-        ot: ucOt,
-        fn: encodeURIComponent(elem.attr('id')),
-        v: encodeURIComponent(val),
-        ex: ucEx
+        ot: encodeURIComponent(objectType),
+        fn: encodeURIComponent(fieldName),
+        v: encodeURIComponent(fieldValue),
+        ex: excludeId
     };
 
     jQuery.ajax({
         url: Routing.generate('rklandingpagesmodule_ajax_checkforduplicate'),
-        datatype: 'json',
+        method: 'GET',
+        dataType: 'json',
         async: false,
         data: params,
         success: function(data) {
@@ -139,7 +143,7 @@ function rKLandingPagesExecuteCustomValidationConstraints(objectType, currentEnt
         }
     });
     jQuery('.validate-unique').each( function() {
-        if (!rKLandingPagesUniqueCheck(jQuery(this).attr('id'), jQuery(this).val(), jQuery(this), currentEntityId)) {
+        if (!rKLandingPagesUniqueCheck(jQuery(this), currentEntityId)) {
             document.getElementById(jQuery(this).attr('id')).setCustomValidity(Translator.__('This value is already assigned, but must be unique. Please change it.'));
         } else {
             document.getElementById(jQuery(this).attr('id')).setCustomValidity('');

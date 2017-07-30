@@ -89,7 +89,7 @@ abstract class AbstractEntityDisplayHelper
     protected function formatImage(ImageEntity $entity)
     {
         return $this->translator->__f('%picture%', [
-            '%picture%' => $entity->getPicture()
+            '%picture%' => is_array($entity->getPicture()) ? $entity->getPicture()['picture'] : $entity->getPicture()
         ]);
     }
     

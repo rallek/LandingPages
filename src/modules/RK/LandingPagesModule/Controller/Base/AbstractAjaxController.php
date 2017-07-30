@@ -164,7 +164,7 @@ abstract class AbstractAjaxController extends AbstractController
             $repository = $this->get('rk_landingpages_module.entity_factory')->getRepository($objectType);
             switch ($fieldName) {
             case 'title':
-                    $result = $repository->detectUniqueState('title', $value, $exclude);
+                    $result = !$repository->detectUniqueState('title', $value, $exclude);
                     break;
             }
             break;
