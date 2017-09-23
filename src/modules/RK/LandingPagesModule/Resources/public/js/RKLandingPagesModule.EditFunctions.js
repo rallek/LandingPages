@@ -67,19 +67,6 @@ function rKLandingPagesInitEditForm(mode, entityId)
     editedObjectType = editForm.attr('id').replace('EditForm', '');
     editedEntityId = entityId;
 
-    if (jQuery('#moderationFieldsSection').length > 0) {
-        jQuery('#moderationFieldsContent').addClass('hidden');
-        jQuery('#moderationFieldsSection legend').addClass('pointer').click(function (event) {
-            if (jQuery('#moderationFieldsContent').hasClass('hidden')) {
-                jQuery('#moderationFieldsContent').removeClass('hidden');
-                jQuery(this).find('i').removeClass('fa-expand').addClass('fa-compress');
-            } else {
-                jQuery('#moderationFieldsContent').addClass('hidden');
-                jQuery(this).find('i').removeClass('fa-compress').addClass('fa-expand');
-            }
-        });
-    }
-
     var allFormFields = editForm.find('input, select, textarea');
     allFormFields.change(function (event) {
         rKLandingPagesExecuteCustomValidationConstraints(editedObjectType, editedEntityId);
@@ -92,7 +79,7 @@ function rKLandingPagesInitEditForm(mode, entityId)
         }
     });
     editForm.find('button[type=submit]').bind('click keypress', function (event) {
-        triggerValidation = !jQuery(this).attr('formnovalidate');
+        triggerValidation = !jQuery(this).prop('formnovalidate');
     });
     editForm.submit(rKLandingPagesHandleFormSubmit);
 

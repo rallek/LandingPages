@@ -2,9 +2,9 @@
 
 1. Copy RKLandingPagesModule into your `modules` directory. Afterwards you should have a folder named `modules/RK/LandingPagesModule/Resources`.
 2. Initialize and activate RKLandingPagesModule in the extensions administration.
-3. Move or copy the directory `Resources/userdata/RKLandingPagesModule/` to `/userdata/RKLandingPagesModule/`.
+3. Move or copy the directory `Resources/userdata/RKLandingPagesModule/` to `/web/uploads/RKLandingPagesModule/`.
    Note this step is optional as the install process can create these folders, too.
-4. Make the directory `/userdata/RKLandingPagesModule/` writable including all sub folders.
+4. Make the directory `/web/uploads/RKLandingPagesModule/` writable including all sub folders.
 
 For questions and other remarks visit our homepage http://k62.de.
 

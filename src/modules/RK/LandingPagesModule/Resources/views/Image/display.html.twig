@@ -39,9 +39,5 @@
 </div>
 {% endblock %}
 {% block display_hooks %}
-    {% set hooks = notifyDisplayHooks(eventName='rklandingpagesmodule.ui_hooks.images.display_view', id=image.getKey(), urlObject=currentUrlObject) %}
-    {% for providerArea, hook in hooks if providerArea != 'provider.scribite.ui_hooks.editor' %}
-        <h4>{{ providerArea }}</h4>
-        {{ hook }}
-    {% endfor %}
+    {{ notifyDisplayHooks(eventName='rklandingpagesmodule.ui_hooks.images.display_view', id=image.getKey(), urlObject=currentUrlObject) }}
 {% endblock %}

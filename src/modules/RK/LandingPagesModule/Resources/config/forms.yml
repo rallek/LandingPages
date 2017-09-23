@@ -6,19 +6,17 @@ services:
         arguments:
             - "@translator.default"
             - "@rk_landingpages_module.listentries_helper"
-        tags:
-            - { name: form.type }
+        tags: ['form.type']
     
     rk_landingpages_module.form.type.imagequicknav:
         class: RK\LandingPagesModule\Form\Type\QuickNavigation\ImageQuickNavType
         arguments:
             - "@translator.default"
             - "@rk_landingpages_module.listentries_helper"
-        tags:
-            - { name: form.type }
+        tags: ['form.type']
     
-    rk_landingpages_module.form.handler.page:
-        class: RK\LandingPagesModule\Form\Handler\Page\EditHandler
+    rk_landingpages_module.form.handler.common:
+        abstract: true
         arguments:
             - "@kernel"
             - "@translator.default"
@@ -35,8 +33,11 @@ services:
             - "@rk_landingpages_module.hook_helper"
         calls:
             - [setLockingApi, ["@?zikula_pagelock_module.api.locking"]]
-        tags:
-            - { name: form.type }
+    
+    
+    rk_landingpages_module.form.handler.page:
+        class: RK\LandingPagesModule\Form\Handler\Page\EditHandler
+        parent: rk_landingpages_module.form.handler.common
     
     rk_landingpages_module.form.type.page:
         class: RK\LandingPagesModule\Form\Type\PageType
@@ -44,29 +45,11 @@ services:
             - "@translator.default"
             - "@rk_landingpages_module.entity_factory"
             - "@rk_landingpages_module.listentries_helper"
-        tags:
-            - { name: form.type }
+        tags: ['form.type']
     
     rk_landingpages_module.form.handler.image:
         class: RK\LandingPagesModule\Form\Handler\Image\EditHandler
-        arguments:
-            - "@kernel"
-            - "@translator.default"
-            - "@form.factory"
-            - "@request_stack"
-            - "@router"
-            - "@logger"
-            - "@zikula_permissions_module.api.permission"
-            - "@zikula_users_module.current_user"
-            - "@rk_landingpages_module.entity_factory"
-            - "@rk_landingpages_module.controller_helper"
-            - "@rk_landingpages_module.model_helper"
-            - "@rk_landingpages_module.workflow_helper"
-            - "@rk_landingpages_module.hook_helper"
-        calls:
-            - [setLockingApi, ["@?zikula_pagelock_module.api.locking"]]
-        tags:
-            - { name: form.type }
+        parent: rk_landingpages_module.form.handler.common
     
     rk_landingpages_module.form.type.image:
         class: RK\LandingPagesModule\Form\Type\ImageType
@@ -74,34 +57,37 @@ services:
             - "@translator.default"
             - "@rk_landingpages_module.entity_factory"
             - "@rk_landingpages_module.listentries_helper"
-        tags:
-            - { name: form.type }
+        tags: ['form.type']
     
     rk_landingpages_module.form.type.block.itemlist:
         class: RK\LandingPagesModule\Block\Form\Type\ItemListBlockType
         arguments:
             - "@translator.default"
-        tags:
-            - { name: form.type }
+        tags: ['form.type']
+    
+    rk_landingpages_module.form.type.block.item:
+        class: RK\LandingPagesModule\Block\Form\Type\ItemBlockType
+        arguments:
+            - "@translator.default"
+            - "@rk_landingpages_module.entity_factory"
+            - "@rk_landingpages_module.entity_display_helper"
+        tags: ['form.type']
     
     rk_landingpages_module.form.type.pagefinder:
         class: RK\LandingPagesModule\Form\Type\Finder\PageFinderType
         arguments:
             - "@translator.default"
-        tags:
-            - { name: form.type }
+        tags: ['form.type']
     
     rk_landingpages_module.form.type.imagefinder:
         class: RK\LandingPagesModule\Form\Type\Finder\ImageFinderType
         arguments:
             - "@translator.default"
-        tags:
-            - { name: form.type }
+        tags: ['form.type']
     
     rk_landingpages_module.form.type.config:
         class: RK\LandingPagesModule\Form\Type\ConfigType
         arguments:
             - "@translator.default"
             - "@=service('zikula_extensions_module.api.variable').getAll('RKLandingPagesModule')"
-        tags:
-            - { name: form.type }
+        tags: ['form.type']

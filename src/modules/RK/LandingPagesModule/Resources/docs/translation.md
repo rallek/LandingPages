@@ -6,7 +6,7 @@ To create a new translation follow the steps below:
 2. Open a console and navigate to the Zikula root directory.
 3. Execute this command replacing `en` by your desired locale code:
 
-`php app/console translation:extract en --bundle=RKLandingPagesModule --enable-extractor=jms_i18n_routing --output-format=po`
+`php bin/console translation:extract en --bundle=RKLandingPagesModule --enable-extractor=jms_i18n_routing --output-format=po`
 
 You can also use multiple locales at once, for example `de fr es`.
 
@@ -14,7 +14,7 @@ You can also use multiple locales at once, for example `de fr es`.
 
 Note you can even include custom views in `app/Resources/RKLandingPagesModule/views/` and JavaScript files in `app/Resources/RKLandingPagesModule/public/js/` like this:
 
-`php app/console translation:extract en --bundle=RKLandingPagesModule --enable-extractor=jms_i18n_routing --output-format=po --dir=./modules/RK/LandingPagesModule --dir=./app/Resources/RKLandingPagesModule`
+`php bin/console translation:extract en --bundle=RKLandingPagesModule --enable-extractor=jms_i18n_routing --output-format=po --dir=./modules/RK/LandingPagesModule --dir=./app/Resources/RKLandingPagesModule`
 
 For questions and other remarks visit our homepage http://k62.de.
 

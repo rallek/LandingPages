@@ -33,9 +33,5 @@
 </div>
 {% endblock %}
 {% block display_hooks %}
-    {% set hooks = notifyDisplayHooks(eventName='rklandingpagesmodule.ui_hooks.pages.display_view', id=page.getKey(), urlObject=currentUrlObject) %}
-    {% for providerArea, hook in hooks if providerArea != 'provider.scribite.ui_hooks.editor' %}
-        <h4>{{ providerArea }}</h4>
-        {{ hook }}
-    {% endfor %}
+    {{ notifyDisplayHooks(eventName='rklandingpagesmodule.ui_hooks.pages.display_view', id=page.getKey(), urlObject=currentUrlObject) }}
 {% endblock %}

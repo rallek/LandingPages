@@ -8,5 +8,4 @@ services:
             - "@request_stack"
             - "@rk_landingpages_module.image_helper"
             - "@rk_landingpages_module.upload_helper"
-        tags:
-            - { name: form.type }
+        tags: ['form.type']

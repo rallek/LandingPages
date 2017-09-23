@@ -55,7 +55,7 @@
                                     <input type="hidden" id="title{{ itemId }}" value="{{ image|rklandingpagesmodule_formattedTitle|e('html_attr') }}" />
                                     <input type="hidden" id="desc{{ itemId }}" value="{% set description %}{% endset %}{{ description|striptags|e('html_attr') }}" />
                                     {% if onlyImages %}
-                                        <input type="hidden" id="imagePath{{ itemId }}" value="/{{ attribute(image, imageField).getPathname() }}" />
+                                        <input type="hidden" id="imagePath{{ itemId }}" value="{{ app.request.basePath }}/{{ attribute(image, imageField).getPathname() }}" />
                                     {% endif %}
                                 {% if not onlyImages %}
                                     </li>

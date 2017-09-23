@@ -30,7 +30,7 @@
                         <input type="checkbox" class="rklandingpages-mass-toggle" />
                     </th>
                 {% endif %}
-                <th id="hItemActions" scope="col" class="{% if items|length > 0 %}fixed-column {% endif %}z-order-unsorted z-w02">{{ __('Actions') }}</th>
+                <th id="hItemActions" scope="col" class="{% if items|length > 0 %}fixed-column {% endif %}unsorted z-w02">{{ __('Actions') }}</th>
                 <th id="hTitle" scope="col" class="text-left">
                     <a href="{{ sort.title.url }}" title="{{ __f('Sort by %s', {'%s': 'title'}) }}" class="{{ sort.title.class }}">{{ __('Title') }}</a>
                 </th>
@@ -118,9 +118,6 @@
     
     {# here you can activate calling display hooks for the view page if you need it #}
     {# % if routeArea != 'admin' %}
-        {% set hooks = notifyDisplayHooks(eventName='rklandingpagesmodule.ui_hooks.pages.display_view', urlObject=currentUrlObject) %}
-        {% for providerArea, hook in hooks %}
-            {{ hook }}
-        {% endfor %}
+        {{ notifyDisplayHooks(eventName='rklandingpagesmodule.ui_hooks.pages.display_view', urlObject=currentUrlObject) }}
     {% endif % #}
 {% endblock %}

@@ -31,19 +31,15 @@
             </fieldset>
         {% endif %}
         
-        {# include return control #}
-        {% if mode == 'create' %}
-            <fieldset>
-                <legend>{{ __('Return control') }}</legend>
-                {{ form_row(form.repeatCreation) }}
-            </fieldset>
-        {% endif %}
         
         {# include possible submit actions #}
         <div class="form-group form-buttons">
             <div class="col-sm-offset-3 col-sm-9">
                 {% for action in actions %}
                     {{ form_widget(attribute(form, action.id)) }}
+                    {% if mode == 'create' and action.id == 'submit' %}
+                        {{ form_widget(attribute(form, 'submitrepeat')) }}
+                    {% endif %}
                 {% endfor %}
                 {{ form_widget(form.reset) }}
                 {{ form_widget(form.cancel) }}
@@ -51,14 +47,7 @@
         </div>
         {{ form_end(form) }}
         {% set hookId = mode != 'create' ? image.id : null %}
-        {% set hooks = notifyDisplayHooks(eventName='rklandingpagesmodule.ui_hooks.images.form_edit', id=hookId) %}
-        {% if hooks is iterable and hooks|length > 0 %}
-            <h3>{{ __('Hooks') }}</h3>
-            {% for providerArea, hook in hooks if providerArea != 'provider.scribite.ui_hooks.editor' %}
-                <h4>{{ providerArea }}</h4>
-                {{ hook }}
-            {% endfor %}
-        {% endif %}
+        {{ notifyDisplayHooks(eventName='rklandingpagesmodule.ui_hooks.images.form_edit', id=hookId) }}
         
     </div>
 {% endblock %}
